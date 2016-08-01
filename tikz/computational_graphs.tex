@@ -1,0 +1,74 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,tikz,border=1]{standalone}
+\usepackage{graphicx}
+\usepackage[default,mdseries=Light,bfseries=Medium,path=fonts]{cjkfonts}
+\usetikzlibrary{calc,positioning,arrows.meta,shapes.geometric,shapes.misc }
+
+\begin{document}
+  \begin{tikzpicture}[
+    set/.style={rectangle,draw,thick,inner sep=0pt,minimum width=20mm,minimum height=62mm},
+    neuron/.style={circle,draw,thick,inner sep=0pt,minimum size=10mm},
+    block/.style={shape=rounded rectangle,draw,thick,inner xsep=0mm,inner ysep=1.6mm,rounded rectangle arc length=90}
+    ]
+    
+    \node(set1) [set] {};
+    \node(title1) [below] at (set1.north) {
+      \begin{tabular}{c}
+        元素\\
+        集\\
+      \end{tabular}
+    };
+    
+    \node(op1) [below,neuron,yshift=-1mm] at (title1.south) {\Large $+$};
+    \node(op2) [below,neuron,below=0.5 of op1] {\Large $\times$};
+    \node(op3) [below,neuron,below=0.5 of op2] {\Large $\sigma$};
+    
+    \node(w1) [anchor=west,neuron,right,xshift=1mm,yshift=5mm] at (set1.south east) {$w_1$};
+    \node(x1) [neuron,right=4mm of w1] {$x_1$};
+    \node(w2) [neuron,right=4mm of x1] {$w_2$};
+    \node(x2) [neuron,right=4mm of w2] {$x_2$};
+    
+    \node(t1) [above=6mm of w1,xshift=6.5mm,neuron] {\Large $\times$};
+    \node(t2) [above=6mm of w2,xshift=6.5mm,neuron] {\Large $\times$};
+    \node(p) [above=6mm of t1,xshift=14.5mm,neuron] {\Large $+$};
+    \node(a) [above=6mm of p,neuron] {\Large $\sigma$};
+    
+    \draw[thick,-{Latex[]}] (w1) to (t1);
+    \draw[thick,-{Latex[]}] (x1) to (t1);
+    \draw[thick,-{Latex[]}] (w2) to (t2);
+    \draw[thick,-{Latex[]}] (x2) to (t2);
+    \draw[thick,-{Latex[]}] (t1) to (p);
+    \draw[thick,-{Latex[]}] (t2) to (p);
+    \draw[thick,-{Latex[]}] (p) to (a);
+
+    \node(set2) [set,right=55mm of set1] {};
+    \node(title2) [below] at (set2.north) {
+      \begin{tabular}{c}
+        元素\\
+        集\\
+      \end{tabular}
+    };
+    \node(block2) [below,block,yshift=-1.8cm] at (title2.south) {
+      \begin{tabular}{c}
+        逻辑\\
+        回归\\
+      \end{tabular}
+    };
+    
+    \node(w) [anchor=west,neuron,right,xshift=1mm,yshift=8mm] at (set2.south east) {$w$};
+    \node(x) [neuron,right=4mm of w] {$x$};
+    
+    \node(block) [block,right=of block2,xshift=-5mm] {
+      \begin{tabular}{c}
+        逻辑\\
+        回归\\
+      \end{tabular}
+    };
+    \draw[thick,-{Latex[]}] (w) to (block);
+    \draw[thick,-{Latex[]}] (x) to (block);
+    
+    
+  \end{tikzpicture}
+\end{document}
