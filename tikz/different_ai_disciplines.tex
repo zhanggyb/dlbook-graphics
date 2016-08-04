@@ -1,0 +1,121 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,tikz,border=1]{standalone}
+\usepackage{graphicx}
+\usepackage[default,mdseries=Light,bfseries=Medium,path=fonts]{cjkfonts}
+\usetikzlibrary{calc,positioning,arrows.meta,shapes.geometric,shapes.misc }
+
+\begin{document}
+  \begin{tikzpicture}[
+    part/.style={rectangle,draw,thick,font=\small,minimum width=25mm,minimum height=20mm},
+    darkpart/.style={part,fill=gray!50},
+    block/.style={rectangle,draw,thick,font=\small,minimum width=7cm,minimum height=18cm}
+    ]
+
+    \node(rule_in) [part] {输入};
+    \node(rule_l1) [part,above=1.5 of rule_in] {
+      \begin{tabular}{c}
+        徒手设计\\
+        的程序\\
+      \end{tabular}
+    };
+    \node(rule_out) [part,above=1.5 of rule_l1] {
+      输出
+    };
+
+    \node(ml_in) [part,right=of rule_in] {输入};
+    \node(ml_l1) [part,above=1.5 of ml_in] {
+      \begin{tabular}{c}
+        徒手设计\\
+        的程序\\
+      \end{tabular}
+    };
+    \node(ml_l2) [darkpart,above=1.5 of ml_l1] {
+      \begin{tabular}{c}
+        映射自\\
+        特征\\  
+      \end{tabular}
+    };
+    \node(ml_out) [part,above=1.5 of ml_l2] {
+      输出
+    };
+    
+    \node(rl_in) [part,right=of ml_in] {输入};
+    \node(rl_l1) [darkpart,above=1.5 of rl_in] {特征};
+    \node(rl_l2) [darkpart,above=1.5 of rl_l1] {
+      \begin{tabular}{c}
+        映射自\\
+        特征\\  
+      \end{tabular}
+    };
+    \node(rl_out) [part,above=1.5 of rl_l2] {
+      输出
+    };
+    
+    \node(dl_in) [part,right=of rl_in] {输入};
+    \node(dl_l1) [darkpart,above=1.5 of dl_in] {样本特征};
+    \node(dl_l2) [darkpart,above=1.5 of dl_l1] {
+      \begin{tabular}{c}
+        额外的具有\\
+        更多抽象特\\
+        征的层\\
+      \end{tabular}
+    };
+    \node(dl_l3) [darkpart,above=1.5 of dl_l2] {
+      \begin{tabular}{c}
+        映射自\\
+        特征\\  
+      \end{tabular}
+    };
+    \node(dl_out) [part,above=1.5 of dl_l3] {
+      输出
+    };
+    
+    \coordinate(p) at ($(rl_l2)!0.5!(dl_l2)$);
+    \node(block) [block,yshift=-5mm] at (p) {};
+    
+    \node(rule_title) [below=1cm] at (rule_in.south) {
+      \small
+      \begin{tabular}{c}
+        基于规则\\
+        的系统\\
+      \end{tabular}
+    };
+    
+    \node(ml_title) [below=1cm] at (ml_in.south) {
+      \small
+      \begin{tabular}{c}
+        经典的\\
+        机器学习\\
+      \end{tabular}
+    };
+    
+    \node(dl_title) [below=4mm] at (dl_in.south) {
+      \small
+        深度学习
+    };
+    
+    \node(rl_title) [below=2mm] at (block.south) {
+      \small
+      表征学习
+    };
+    
+    \draw[thick,-{Latex[]}] (rule_in) to (rule_l1);
+    \draw[thick,-{Latex[]}] (rule_l1) to (rule_out);
+
+    \draw[thick,-{Latex[]}] (ml_in) to (ml_l1);
+    \draw[thick,-{Latex[]}] (ml_l1) to (ml_l2);
+    \draw[thick,-{Latex[]}] (ml_l2) to (ml_out);
+    
+    \draw[thick,-{Latex[]}] (rl_in) to (rl_l1);    
+    \draw[thick,-{Latex[]}] (rl_l1) to (rl_l2);    
+    \draw[thick,-{Latex[]}] (rl_l2) to (rl_out);    
+
+    \draw[thick,-{Latex[]}] (dl_in) to (dl_l1);    
+    \draw[thick,-{Latex[]}] (dl_l1) to (dl_l2);    
+    \draw[thick,-{Latex[]}] (dl_l2) to (dl_l3);    
+    \draw[thick,-{Latex[]}] (dl_l3) to (dl_out);    
+
+  \end{tikzpicture}
+\end{document}

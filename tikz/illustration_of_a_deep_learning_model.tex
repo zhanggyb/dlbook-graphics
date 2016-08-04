@@ -8,97 +8,97 @@
 
 \begin{document}
   \begin{tikzpicture}[
-    neuron/.style={circle,draw,thick,inner sep=0pt,minimum size=20mm}
+    neuron/.style={circle,draw,thick,inner sep=0pt,minimum size=12mm}
     ]
     
     \node(input1) [neuron] {
-    	\scalebox{1.8}{\includegraphics{pixmap/input_pixels_1}}
+    	\includegraphics{pixmap/input_pixels_1}
     };
-    \node(input2) [neuron,right=of input1] {
-    	\scalebox{1.8}{\includegraphics{pixmap/input_pixels_2}}
+    \node(input2) [neuron,right=1 of input1] {
+    	\includegraphics{pixmap/input_pixels_2}
     };
-    \node(input3) [neuron,right=of input2] {
-    	\scalebox{1.8}{\includegraphics{pixmap/input_pixels_3}}
+    \node(input3) [neuron,right=1 of input2] {
+    	\includegraphics{pixmap/input_pixels_3}
     };
     
-    \node(layer1st1) [neuron,above=1.5 of input1] {
-    	\scalebox{1.8}{\includegraphics{pixmap/edges_1}}
+    \node(layer1st1) [neuron,above=1 of input1] {
+    	\includegraphics{pixmap/edges_1}
     };
-    \node(layer1st2) [neuron,above=1.5 of input2] {
-    	\scalebox{1.8}{\includegraphics{pixmap/edges_2}}
+    \node(layer1st2) [neuron,above=1 of input2] {
+    	\includegraphics{pixmap/edges_2}
     };
-    \node(layer1st3) [neuron,above=1.5 of input3] {
-    	\scalebox{1.8}{\includegraphics{pixmap/edges_3}}
+    \node(layer1st3) [neuron,above=1 of input3] {
+    	\includegraphics{pixmap/edges_3}
     };
 
-    \node(layer2nd1) [neuron,above=1.5 of layer1st1] {
-    	\scalebox{1.8}{\includegraphics{pixmap/corners_and_contours_1}}
+    \node(layer2nd1) [neuron,above=1 of layer1st1] {
+    	\includegraphics{pixmap/corners_and_contours_1}
     };
-    \node(layer2nd2) [neuron,above=1.5 of layer1st2] {
-    	\scalebox{1.8}{\includegraphics{pixmap/corners_and_contours_2}}
+    \node(layer2nd2) [neuron,above=1 of layer1st2] {
+    	\includegraphics{pixmap/corners_and_contours_2}
     };
-    \node(layer2nd3) [neuron,above=1.5 of layer1st3] {
-    	\scalebox{1.8}{\includegraphics{pixmap/corners_and_contours_3}}
+    \node(layer2nd3) [neuron,above=1 of layer1st3] {
+    	\includegraphics{pixmap/corners_and_contours_3}
     };
 
-    \node(layer3rd1) [neuron,above=1.5 of layer2nd1] {
-    	\scalebox{1.8}{\includegraphics{pixmap/object_parts_1}}
+    \node(layer3rd1) [neuron,above=1 of layer2nd1] {
+    	\includegraphics{pixmap/object_parts_1}
     };
-    \node(layer3rd2) [neuron,above=1.5 of layer2nd2] {
-    	\scalebox{1.8}{\includegraphics{pixmap/object_parts_2}}
+    \node(layer3rd2) [neuron,above=1 of layer2nd2] {
+    	\includegraphics{pixmap/object_parts_2}
     };
-    \node(layer3rd3) [neuron,above=1.5 of layer2nd3] {
-    	\scalebox{1.8}{\includegraphics{pixmap/object_parts_3}}
-    };
-    
-    \node(output1) [neuron,above=1.5 of layer3rd1] {
-    	\Large 车
-    };
-    \node(output2) [neuron,above=1.5 of layer3rd2] {
-    	\Large 人
-    };
-    \node(output3) [neuron,above=1.5 of layer3rd3] {
-    	\Large 动物
+    \node(layer3rd3) [neuron,above=1 of layer2nd3] {
+    	\includegraphics{pixmap/object_parts_3}
     };
     
-    \node [right=of input3] {
-    	\large
+    \node(output1) [neuron,above=1 of layer3rd1] {
+    	车
+    };
+    \node(output2) [neuron,above=1 of layer3rd2] {
+    	人
+    };
+    \node(output3) [neuron,above=1 of layer3rd3] {
+    	动物
+    };
+    
+    \node [right=0.5 of input3] {
+      \small
     	\begin{tabular}{c}
 	    	可见层\\
     		(输入像素)\\
     	\end{tabular}
     };
 
-    \node [right=of layer1st3] {
-    	\large
+    \node [right=0.5 of layer1st3] {
+      \small
     	\begin{tabular}{c}
 	    	第一个隐藏层\\
     		(边缘)\\
     	\end{tabular}
     };
-    \node [right=of layer2nd3] {
-    	\large
+    \node [right=0.5 of layer2nd3] {
+      \small
     	\begin{tabular}{c}
 	    	第二个隐藏层\\
     		(角点和轮廓)\\
     	\end{tabular}
     };
-    \node [right=of layer3rd3] {
-    	\large
+    \node [right=0.5 of layer3rd3] {
+      \small
     	\begin{tabular}{c}
 	    	第三个隐藏层\\
     		(物体组成部分)\\
     	\end{tabular}
     };
-    \node [right=of output3] {
-    	\large
+    \node [right=0.5 of output3] {
+      \small
     	\begin{tabular}{c}
 	    	输出\\
     		(物体识别)\\
     	\end{tabular}
     };
 	\node(image) [left=of layer2nd1,yshift=-1.6cm] {
-		\scalebox{1.8}{\includegraphics{pixmap/image_of_person}}
+		\includegraphics{pixmap/image_of_person}
 	};
 
 	\foreach \x in {1,...,3}
@@ -109,7 +109,7 @@
 	  		\draw[thick,-{Latex[]}] (layer3rd\x) to (output\y);
 	};
 	
-	\draw[very thick,-{Latex[open]}] (image.south)++(1,0) .. controls(-3.5,-0.25) .. (input1.west);
+	\draw[very thick,-{Latex[open]}] (image.south)++(0.5,0) .. controls(-2.5,-0.25) .. (input1.west);
 	
   \end{tikzpicture}
 \end{document}
