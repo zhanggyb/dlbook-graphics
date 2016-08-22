@@ -25,6 +25,6 @@ function cartesian_scatter(n)
     set(gca, 'ytick', []);
     xlabel('x', 'fontsize', 24);
     ylabel('y', 'fontsize', 24);
-    t = title('笛卡尔坐标系', 'fontsize', 24);
+    t = title('直角坐标系', 'fontsize', 24);
     set(t, 'FontName', 'Noto Sans CJK SC');
 end
