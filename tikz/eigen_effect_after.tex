@@ -1,0 +1,56 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,tikz,border=1]{standalone}
+\usepackage[default,mdseries=Light,bfseries=Medium,path=fonts]{cjkfonts}
+\usetikzlibrary{calc,positioning,arrows.meta,shapes.geometric,shapes.misc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+
+\begin{document}
+\begin{tikzpicture}
+  
+  \begin{axis}[
+    title={相乘后},
+    xlabel={$x'_0$},
+    x label style={yshift=0.5em},
+    ylabel={$x'_1$},
+    y label style={yshift=-1em},
+    xtick={-3, -2, -1, 0, 1, 2, 3},
+    ytick={-3, -2, -1, 0, 1, 2, 3},
+    xmin=-3,
+    xmax=3,
+    ymin=-3,
+    ymax=3,
+    unit vector ratio*=1 1 1]
+    
+    \addplot[
+    blue,
+    domain=0:2*pi,
+    samples=201,
+    rotate around={45:(axis cs:0,0)}
+    ](
+    {3 * cos(deg(x))},
+    {0.5 * sin(deg(x))}
+    );
+    
+    \coordinate (o) at (axis cs:0,0);
+    \coordinate (a) at (axis cs:{cos(45)},{sin(45)});
+    \coordinate (b) at (axis cs:{cos(45)},{sin(-45)});
+    \coordinate (c) at (axis cs:{3*cos(45)},{3*sin(45)});
+    \coordinate (d) at (axis cs:{0.5*cos(45)},{0.5*sin(-45)});
+    
+    \draw[-{Latex[]}] (o) to (a);
+    \draw[-{Latex[]}] (o) to (b);
+    \draw[-{Latex[]}] (o) to (c);
+    \draw[-{Latex[]}] (o) to (d);
+    
+    \node[anchor=south west,xshift=-1mm,yshift=-3mm] at (a) {\footnotesize$v^{(1)}$};
+    \node[anchor=west,xshift=-1mm,yshift=2mm] at (b) {\footnotesize$v^{(2)}$};
+    \node[anchor=south west,xshift=-2mm,yshift=-1mm] at (c) {\footnotesize$\lambda_1v^{(1)}$};
+    \node[anchor=west,xshift=-1mm,yshift=2mm] at (d) {\footnotesize$\lambda_2v^{(2)}$};
+    
+  \end{axis}
+  
+\end{tikzpicture}
+\end{document}
