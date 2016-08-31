@@ -1,0 +1,86 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,tikz,border=1]{standalone}
+\usepackage[default,mdseries=Light,bfseries=Medium,path=fonts]{cjkfonts}
+\usetikzlibrary{calc,positioning,arrows.meta,shapes.geometric,shapes.misc}
+\usepackage{pgfplots}
+
+\begin{document}
+\begin{tikzpicture}
+  
+  \begin{axis}[
+    name=before,
+    width=7.5cm,
+    height=7.5cm,
+    title={直角坐标系},
+    xlabel={$x$},
+    ylabel={$y$},
+    x label style={yshift=1em},
+    y label style={yshift=-2em},
+    xtick=\empty,
+    ytick=\empty]
+    
+    \addplot[only marks,
+            mark=triangle*,
+            green!60!gray,
+            samples=400,
+            domain=0:2*pi]    ({
+      cos(deg(x)) + cos(deg(x)) * (1 + rand)
+    },{
+      sin(deg(x)) + sin(deg(x)) * (1 + rand)
+    });
+   
+    \addplot[only marks,
+            mark=*,
+            draw=black,
+            blue!80!gray,
+            samples=400,
+            domain=0:2*pi]    ({
+      cos(deg(x)) * rand
+    },{
+      sin(deg(x)) * rand
+    });
+     
+  \end{axis}
+  
+    \begin{axis}[
+    name=after,
+    at=(before.east),
+    anchor=west,
+    width=7.5cm,
+    height=7.5cm,
+    xshift=1.2cm,
+    title={极坐标系},
+    xlabel={$r$},
+    ylabel={$\theta$},
+    x label style={yshift=1em},
+    y label style={yshift=-2em},
+    xtick=\empty,
+    ytick=\empty]
+    
+    \addplot[only marks,
+            mark=triangle*,
+            green!60!gray,
+            samples=400,
+            domain=0:2*pi]    ({
+      sqrt((cos(deg(x)) + cos(deg(x)) * (1 + rand))^2 + (sin(deg(x)) + sin(deg(x)) * (1 + rand))^2)
+    },{
+      x
+    });
+   
+    \addplot[only marks,
+            mark=*,
+            draw=black,
+            blue!80!gray,
+            samples=400,
+            domain=0:2*pi]    ({
+      sqrt((cos(deg(x)) * rand)^2 + (sin(deg(x)) * rand)^2)
+    },{
+      x
+    });
+    
+  \end{axis}
+  
+\end{tikzpicture}
+\end{document}
