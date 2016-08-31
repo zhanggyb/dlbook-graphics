@@ -1,0 +1,92 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,tikz,border=1]{standalone}
+\usepackage[default,mdseries=Light,bfseries=Medium,path=fonts]{cjkfonts}
+\usetikzlibrary{calc,positioning,arrows.meta,shapes.geometric,shapes.misc}
+\usepackage{pgfplots}
+
+\begin{document}
+\begin{tikzpicture}
+  
+  \begin{axis}[
+    name=before,
+    width=12cm,
+    height=9cm,
+    title={梯度下降},
+    xlabel={$x$},
+    ylabel=\empty,
+    xtick distance=0.5,
+    ytick distance=0.5,
+    xticklabel style={font=\footnotesize,
+      /pgf/number format/precision=1,      /pgf/number format/fixed,      /pgf/number format/fixed zerofill},
+    yticklabel style={font=\footnotesize,
+      /pgf/number format/precision=1,      /pgf/number format/fixed,      /pgf/number format/fixed zerofill},
+    xmin=-2.0,
+    xmax=2.0,
+    ymin=-2.0,
+    ymax=2.0,
+    legend pos=south east
+    ]
+
+    \addplot[
+      blue,
+      dashed,
+      thick,
+      samples=201,
+      domain=-2:2
+    ]{
+      (1/2) * x^2
+    };
+    \addlegendentry{$f(x) = \frac{1}{2}x^2$}
+        
+    \addplot[
+      green!60!gray,
+      thick,
+      samples=201,
+      domain=-2:2
+    ]{
+      x
+    };
+    \addlegendentry{$f'(x) = x$}
+    
+    \coordinate (o) at (axis cs:0,0);
+    \coordinate (o1) at (axis cs:0,1);
+    \coordinate (a) at (axis cs:-1,0.5);
+    \coordinate (a1) at (axis cs:-1,0);
+    \coordinate (b) at (axis cs:1,0.5);
+    \coordinate (b1) at (axis cs:1,0);
+    
+    \draw (o) to (o1);
+    \draw (a) to (a1);
+    \draw (b) to (b1);
+    
+    \node[above] at (o1) {
+      \footnotesize
+      \begin{tabular}{l}
+        全局最小值在 $x = 0$ 处\\
+        因为 $f'(x) = 0$，梯度\\
+        下降在这里停止
+      \end{tabular}
+    };
+    \node[below] at (a1) {
+      \footnotesize
+      \begin{tabular}{l}
+        对于 $x < 0$，我们有 $f'(x) < 0$\\
+        所以我们能通过往右移动\\
+        来减小 $f$
+      \end{tabular}
+    };
+    \node[below] at (b1) {
+      \footnotesize
+      \begin{tabular}{l}
+        对于 $x > 0$，我们有 $f'(x) > 0$\\
+        所以我们能通过往左移动\\
+        来减小 $f$
+      \end{tabular}
+    };
+    
+  \end{axis}
+    
+\end{tikzpicture}
+\end{document}
