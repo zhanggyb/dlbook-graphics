@@ -1,0 +1,100 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,tikz,border=1]{standalone}
+\usepackage[default,mdseries=Light,bfseries=Medium,path=fonts]{cjkfonts}
+\usepackage{pgfplots}
+\usetikzlibrary{calc}
+
+\begin{document}
+\begin{tikzpicture}
+  
+  \begin{axis}[
+      name=minimum,
+      width=5.2cm,
+      title={最小值},
+      xlabel=\empty,
+      ylabel=\empty,
+      ymin=-1,
+      ymax=1,
+      ticks=none
+    ]
+    
+    \addplot[
+      blue,
+      thick,
+      domain=-1:1,
+      samples=201
+    ]{
+      x^2
+    };
+    
+    \node [circle,draw,fill=blue,inner sep=0,minimum size=2mm] at (axis cs:0,0) {};
+
+  \end{axis}
+
+  \begin{axis}[
+      at=(minimum.east),
+      anchor=west,
+      xshift=5mm,
+      name=maximum,
+      width=5.2cm,
+      title={最大值},
+      xlabel=\empty,
+      ylabel=\empty,
+      ymin=-1,
+      ymax=1,
+      ticks=none
+    ]
+    
+    \addplot[
+      blue,
+      thick,
+      domain=-1:1,
+      samples=201
+    ]{
+      -x^2
+    };
+    
+    \node(p) [circle,draw,fill=blue,inner sep=0,minimum size=2mm] at (axis cs:0,0) {};
+
+  \end{axis}
+
+  \begin{axis}[
+      at=(maximum.east),
+      anchor=west,
+      xshift=5mm,
+      name=saddle,
+      width=5.2cm,
+      title={鞍点},
+      xlabel=\empty,
+      ylabel=\empty,
+      ymin=-1,
+      ymax=1,
+      ticks=none
+    ]
+    
+    \addplot[
+      blue,
+      thick,
+      domain=-1:1,
+      samples=201
+    ]{
+      x^3
+    };
+    
+    \node [circle,draw,fill=blue,inner sep=0,minimum size=2mm] at (axis cs:0,0) {};
+
+  \end{axis}
+
+  \node[above=3cm] (t) at (p) {临界点的类型};
+
+  \coordinate(a) at (minimum.south west);
+  \coordinate(b) at (t.north);
+  \coordinate(c) at (saddle.north east);
+  \coordinate(d) at (b -| c);
+
+  \pgfresetboundingbox    \path (a) rectangle (d);
+
+\end{tikzpicture}
+\end{document}
