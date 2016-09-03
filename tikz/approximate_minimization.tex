@@ -1,0 +1,88 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt,tikz,border=1]{standalone}
+\usepackage[default,mdseries=Light,bfseries=Medium,path=fonts]{cjkfonts}
+\usetikzlibrary{calc,positioning,arrows.meta,shapes.geometric,shapes.misc}
+\usepackage{pgfplots}
+
+\begin{document}
+\begin{tikzpicture}
+  
+  \begin{axis}[
+    name=before,
+    width=13cm,
+    height=8cm,
+    title={近似最小化},
+    xlabel={$x$},
+    ylabel=$f(x)$,
+    xlabel style={yshift=1em},
+    ylabel style={yshift=-2em},
+    ticks=none,
+    xtick distance=0.5,
+    ytick distance=0.5,
+    xticklabel style={font=\footnotesize,
+      /pgf/number format/precision=1,      /pgf/number format/fixed,      /pgf/number format/fixed zerofill},
+    yticklabel style={font=\footnotesize,
+      /pgf/number format/precision=1,      /pgf/number format/fixed,      /pgf/number format/fixed zerofill},
+    xmin=-2.0,
+    xmax=2.0,
+    ymin=-2.0,
+    ymax=2.0
+    ]
+
+	\addplot[smooth,blue,thick] coordinates{
+		(-2.0,-1.0)
+		(-1.05,-1.6)
+		(-0.6,-0.9)
+		(-0.2,-1.55)
+		(0.2,-0.5)
+		(0.6,-0.3)
+		(1.0,-0.5)
+		(1.3,0.7)
+		(1.6,1.1)
+		(2.0,2.0)
+	};
+
+    \coordinate (a0) at (axis cs:-1.05,-1.6);
+    \coordinate (a1) at (axis cs:-1.05,-0.9);
+    \draw[-{Latex[]}] (a1) to (a0);
+    \node[above] at (a1) {
+      \footnotesize
+      \begin{tabular}{l}
+        理想情况，我们想要\\
+        获得全局最小值，但\\
+		这或许不可能
+      \end{tabular}
+    };
+
+    \coordinate (b0) at (axis cs:-0.215,-1.55);
+    \coordinate (b1) at (axis cs:-0.215,0.5);
+    \draw[-{Latex[]}] (b1) to (b0);
+    \node[above] at (b1) {
+      \footnotesize
+      \begin{tabular}{l}
+        这个局部最小值表现得\\
+        和全局的那个非常接近，\\
+        所以它是一个可接受的\\
+        断点
+      \end{tabular}
+    };
+
+    \coordinate (c0) at (axis cs:0.96,-0.52);
+    \coordinate (c1) at (axis cs:0.96,-1.0);
+    
+    \draw[-{Latex[]}] (c1) to (c0);
+    
+    \node[below] at (c1) {
+      \footnotesize
+      \begin{tabular}{l}
+        这个局部最小值表现\\
+        糟糕，应该被避免
+      \end{tabular}
+    };
+						
+  \end{axis}
+    
+\end{tikzpicture}
+\end{document}
